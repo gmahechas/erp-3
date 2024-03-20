@@ -1,0 +1,59 @@
+{
+  "name": "@gmahechas/common-devtools-ts-be",
+  "version": "0.0.11",
+  "description": "common-devtools-ts-be",
+  "author": "gmahechas",
+  "license": "ISC",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist"
+  },
+  "files": [
+    "dist",
+    ".eslintignore",
+    ".eslintrc.js",
+    ".lintstagedrc",
+    ".prettierignore",
+    ".prettierrc",
+    "commitlint.config.js"
+  ],
+  "bin": {
+    "init-husky": "./dist/bin/init-husky.js"
+  },
+  "scripts": {
+    "eslint": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore src/**/*.ts",
+    "eslint:fix": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore --fix src/**/*.ts",
+    "prettier": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check \"./src/**/*.{ts,json}\"",
+    "prettier:write": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check --write \"./src/**/*.{ts,json}\"",
+    "format": "pnpm prettier:write && pnpm eslint:fix",
+    "lint-staged": "lint-staged --config ./.lintstagedrc",
+    "commitlint": "commitlint --config ./commitlint.config.js --edit",
+    "build:development": "rm -rf dist && tsc --project tsconfig.development.json",
+    "build:stage": "rm -rf dist && tsc --project tsconfig.stage.json",
+    "build:production": "rm -rf dist && tsc --project tsconfig.production.json",
+    "preversion": "pnpm build:production",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@commitlint/cli": "18.4.3",
+    "@commitlint/config-conventional": "18.4.3",
+    "@types/eslint": "8.56.0",
+    "@types/lint-staged": "13.3.0",
+    "@typescript-eslint/eslint-plugin": "6.14.0",
+    "@typescript-eslint/parser": "6.14.0",
+    "eslint": "8.56.0",
+    "eslint-plugin-prettier": "5.0.1",
+    "husky": "8.0.3",
+    "lint-staged": "15.2.0",
+    "prettier": "3.1.1",
+    "prettier-plugin-organize-imports": "3.2.4"
+  },
+  "peerDependencies": {
+    "@gmahechas/common-typescript-ts-be": "5.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
